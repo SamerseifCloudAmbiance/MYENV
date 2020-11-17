@@ -5,8 +5,8 @@ node {
     def SERVER_KEY_CREDENTIALS_ID=env.SERVER_KEY_CREDENTIALS_ID
     def DEPLOYDIR='manifest/'
     def TEST_LEVEL='RunLocalTests'
-    def SF_INSTANCE_URL = env.SF_INSTANCE_URL ?: "https://test.salesforce.com"
-
+    def SF_INSTANCE_URL = env.SF_INSTANCE_URL ?: "https://test.salesforce.com" 
+    def SourcesDirectory = "~"
 
     //def toolbelt = tool 'toolbelt'
 
@@ -17,6 +17,15 @@ node {
 
     stage('checkout source') {
         checkout scm
+        sh "New-Item ${SourcesDirectory} -Name ChangedFiles -type directory"
+    	sh "git diff HEAD~ --name-only  | Copy-Item -Destination ${SourcesDirectory}\ChangedFiles\ -Recurse"
+    	sh "New-Item $(Build.SourcesDirectory)\ChangedFiles\ -Name ChangedMeta -type directory"
+    	sh "Get-ChildItem -Path ${SourcesDirectory}\ChangedFiles\ -exclude ChangedMeta,*.xml,*.cfg,*.yml | Copy-Item -Destination ${SourcesDirectory}\ChangedFiles\ChangedMeta -Recurse -PassThru"
+    	sh "Get-ChildItem -Path ${SourcesDirectory}\ChangedFiles\ChangedMeta -exclude *.xml | Rename-Item -NewName { $_.Name +'-meta.xml' }"
+	sh "ls ${SourcesDirectory}\ChangedFiles\ChangedMeta -exclude *.txt | % Name  > ${SourcesDirectory}\ChangedFiles\ChangedMeta\SearchforMeta.txt "
+	sh "$files=Get-Content ${SourcesDirectory}\ChangedFiles\ChangedMeta\SearchforMeta.txt"
+	sh "ForEach($file in $files){Get-ChildItem -Path ${SourcesDirectory}\force-app\main\default" -recurse | Where-Object { $_.Name -match $($file) } | Copy-Item -Destination ${SourcesDirectory}\ChangedFiles}"
+	sh "Remove-Item -Recurse -Force "${SourcesDirectory}\ChangedFiles\ChangedMeta"
     }
 
 
