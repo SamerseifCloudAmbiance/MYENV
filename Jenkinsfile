@@ -24,7 +24,7 @@ node {
     	sh "Get-ChildItem -Path ${SourcesDirectory}\\ChangedFiles\\ChangedMeta -exclude *.xml | Rename-Item -NewName { $_.Name +'-meta.xml' }"
 	sh "ls ${SourcesDirectory}\\ChangedFiles\\ChangedMeta -exclude *.txt | % Name  > ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\SearchforMeta.txt "
 	sh "$files=Get-Content ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\SearchforMeta.txt"
-	sh "ForEach($file in $files){Get-ChildItem -Path ${SourcesDirectory}\\force-app\\main\\default -recurse | Where-Object { $_.Name -match $($file) } | Copy-Item -Destination ${SourcesDirectory}\\ChangedFiles}"
+	sh "ForEach($file in $files){Get-ChildItem -Path ${SourcesDirectory}\\force-app\\main\\default -recurse | Where-Object { \$_.Name -match \$(\$file) } | Copy-Item -Destination ${SourcesDirectory}\\ChangedFiles}"
 	sh "Remove-Item -Recurse -Force ${SourcesDirectory}\\ChangedFiles\\ChangedMeta"
     }
 
