@@ -16,7 +16,7 @@ node {
     // -------------------------------------------------------------------------
 
     stage('checkout source') {
-        //checkout scm
+        checkout scm
     }
 
 
