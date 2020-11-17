@@ -17,10 +17,10 @@ node {
 
     stage('checkout source') {
         checkout scm
-	    /*script {
+	    //script {
 	echo scm
         sh "New-Item ${SourcesDirectory} -Name ChangedFiles -type directory"
-    	echo ChangedFiles
+    	/*echo ChangedFiles
     	sh "git diff HEAD~ --name-only  | Copy-Item -Destination ${SourcesDirectory}\\ChangedFiles\\ -Recurse"
     echo diff
     	sh "New-Item ${SourcesDirectory}\\ChangedFiles\\ -Name ChangedMeta -type directory"
