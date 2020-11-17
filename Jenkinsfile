@@ -17,7 +17,7 @@ node {
 
     stage('checkout source') {
         checkout scm
-	    script {
+	    /*script {
 	echo scm
         sh "New-Item ${SourcesDirectory} -Name ChangedFiles -type directory"
     	echo ChangedFiles
@@ -37,7 +37,7 @@ node {
 	echo loop
 	    sh "Remove-Item -Recurse -Force ${SourcesDirectory}\\ChangedFiles\\ChangedMeta"
 	    echo Remove-Item
-	    }
+	    }*/
     }
 
 
