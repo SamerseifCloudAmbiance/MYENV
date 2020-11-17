@@ -18,8 +18,8 @@ node {
     stage('checkout source') {
         checkout scm
 	    //script {
-	sh "echo scm"
-        sh "New-Item ${SourcesDirectory} -Name ChangedFiles -type directory"
+	command "echo scm"
+        command "mkdir ChangedFiles"
     	/*echo ChangedFiles
     	sh "git diff HEAD~ --name-only  | Copy-Item -Destination ${SourcesDirectory}\\ChangedFiles\\ -Recurse"
     echo diff
