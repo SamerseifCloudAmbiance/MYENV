@@ -6,7 +6,7 @@ node {
     def DEPLOYDIR='manifest/'
     def TEST_LEVEL='RunLocalTests'
     def SF_INSTANCE_URL = env.SF_INSTANCE_URL ?: "https://test.salesforce.com" 
-    def SourcesDirectory = "'C:\Users\Samer Seif\AppData\Local\Jenkins\.jenkins\workspace\Salesforce MYEnv\'"
+    def SourcesDirectory = "'C:/Users/Samer Seif/AppData/Local/Jenkins/.jenkins/workspace/Salesforce MYEnv/'"
 
     //def toolbelt = tool 'toolbelt'
 
