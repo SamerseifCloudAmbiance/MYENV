@@ -19,7 +19,7 @@ node {
         checkout scm
         command "bash New-Item ${SourcesDirectory} -Name ChangedFiles -type directory"
     	command "echo ChangedFiles"
-    	command "bash git diff HEAD~ --name-only  |bash Copy-Item -Destination ${SourcesDirectory}\\ChangedFiles\\ -Recurse"
+    	command "git diff HEAD~ --name-only  |bash Copy-Item -Destination ${SourcesDirectory}\\ChangedFiles\\ -Recurse"
      	command "echo ChangedFiles"
     	command "bash New-Item ${SourcesDirectory}\\ChangedFiles\\ -Name ChangedMeta -type directory"
     	command "echo ChangedMeta"
