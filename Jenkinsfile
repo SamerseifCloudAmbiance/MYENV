@@ -29,7 +29,7 @@ node {
 	command "echo Rename"
     	powershell "ls ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\ -exclude *.txt | % Name  > ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\SearchforMeta.txt "
 	command "echo ls"
-    	powershell "$files=Get-Content ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\SearchforMeta.txt"
+    	powershell "\$files=Get-Content ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\SearchforMeta.txt"
 	command "echo Get-Content"
     	powershell "ForEach(\$file in \$files){Get-ChildItem -Path ${SourcesDirectory}\\force-app\\main\\default -recurse | Where-Object { \$_.Name -match \$(\$file) } | Copy-Item -Destination ${SourcesDirectory}\\ChangedFiles}"
    	command "echo ChangedMeta"
