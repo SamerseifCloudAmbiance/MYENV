@@ -4,7 +4,7 @@ node {
     def SF_USERNAME=env.SF_USERNAME
     def SERVER_KEY_CREDENTIALS_ID=env.SERVER_KEY_CREDENTIALS_ID
     def DEPLOYDIR='ChangedFiles/'
-    def TEST_LEVEL='RunLocalTests'
+    def TEST_LEVEL='NoTestRun'
     def SF_INSTANCE_URL = env.SF_INSTANCE_URL ?: "https://test.salesforce.com" 
     def SourcesDirectory = "."
 
@@ -19,6 +19,7 @@ node {
         checkout scm
         powershell "New-Item ${SourcesDirectory} -Name ChangedFiles -type directory"
     	command "echo ChangedFiles"
+   	powershell "Copy-Item  -Path ${SourcesDirectory}\\manifest\\package.xml -Destination ${SourcesDirectory}\\ChangedFiles\\ -Recurse -force"
     	powershell "git diff HEAD~ --name-only  | Copy-Item -Destination ${SourcesDirectory}\\ChangedFiles\\ -Recurse"
      	command "echo ChangedFiles"
     	powershell "New-Item ${SourcesDirectory}\\ChangedFiles\\ -Name ChangedMeta -type directory"
@@ -66,6 +67,9 @@ node {
 		    if (rc != 0) {
 			error 'Salesforce deploy and test run failed.'
 		    }
+		    else{
+			    powershell "Remove-Item -Recurse -Force ${SourcesDirectory}\\ChangedFiles"
+		     }
 		}
 
 
