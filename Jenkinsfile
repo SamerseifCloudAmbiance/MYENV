@@ -17,11 +17,11 @@ node {
 
     stage('checkout source') {
         checkout scm
-        command "bash New-Item ${SourcesDirectory} -Name ChangedFiles -type directory"
+        powershell "New-Item ${SourcesDirectory} -Name ChangedFiles -type directory"
     	command "echo ChangedFiles"
-    	command "git diff HEAD~ --name-only  |bash Copy-Item -Destination ${SourcesDirectory}\\ChangedFiles\\ -Recurse"
+    	powershell "git diff HEAD~ --name-only  | Copy-Item -Destination ${SourcesDirectory}\\ChangedFiles\\ -Recurse"
      	command "echo ChangedFiles"
-    	command "bash New-Item ${SourcesDirectory}\\ChangedFiles\\ -Name ChangedMeta -type directory"
+    	powershell "New-Item ${SourcesDirectory}\\ChangedFiles\\ -Name ChangedMeta -type directory"
     	command "echo ChangedMeta"
     	//command "bash Get-ChildItem -Path ${SourcesDirectory}\\ChangedFiles\\ -exclude ChangedMeta,*.xml,*.cfg,*.yml | Copy-Item -Destination ${SourcesDirectory}\\ChangedFiles\\ChangedMeta -Recurse -PassThru"
     	//command "bash Get-ChildItem -Path ${SourcesDirectory}\\ChangedFiles\\ChangedMeta -exclude *.xml | Rename-Item -NewName { $_.Name +'-meta.xml' }"
