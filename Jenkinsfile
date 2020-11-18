@@ -25,9 +25,9 @@ node {
     	command "echo \"Get-ChildItem -Path ${SourcesDirectory}\\ChangedFiles\\ -exclude ChangedMeta,Jenkinsfile,*.xml,*.cfg,*.yml | Copy-Item -Destination ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\ -Recurse -PassThru \""
     	powershell "Get-ChildItem -Path ${SourcesDirectory}\\ChangedFiles\\ -exclude ChangedMeta,Jenkinsfile,*.xml,*.cfg,*.yml | Copy-Item -Destination ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\ -Recurse -PassThru"
     	
-    	/*command "echo \"Get-ChildItem -Path ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\ -exclude *.xml | Rename-Item -NewName %{$_.Name +'-meta.xml'}\""
-    	powershell "Get-ChildItem -Path ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\ -exclude *.xml | Rename-Item -NewName %{$_.Name +'-meta.xml'}"
-	command "echo Rename"
+    	command "echo \"Get-ChildItem -Path ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\ -exclude *.xml | Rename-Item -NewName {\$_.Name +'-meta.xml'}\""
+    	powershell "Get-ChildItem -Path ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\ -exclude *.xml | Rename-Item -NewName {\$_.Name +'-meta.xml'}"
+	/*command "echo Rename"
     	powershell "ls ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\ -exclude *.txt | % Name  > ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\SearchforMeta.txt "
 	command "echo ls"
     	powershell "$files=Get-Content ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\SearchforMeta.txt"
