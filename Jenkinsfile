@@ -25,7 +25,7 @@ node {
     	command "echo ChangedMeta"
     	powershell "Get-ChildItem -Path ${SourcesDirectory}\\ChangedFiles\\ -exclude ChangedMeta,*.xml,*.cfg,*.yml | Copy-Item -Destination ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\ -Recurse -PassThru"
     	command "echo ChildItem"
-    	powershell "Get-ChildItem -Path ${SourcesDirectory}\\ChangedFiles\\ChangedMeta -exclude *.xml | Rename-Item -NewName { $_.Name +'-meta.xml' }"
+    	powershell "Get-ChildItem -Path ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\ -exclude *.xml | Rename-Item -NewName { $_.Name +'-meta.xml' }"
 	command "echo Rename"
     	powershell "ls ${SourcesDirectory}\\ChangedFiles\\ChangedMeta -exclude *.txt | % Name  > ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\SearchforMeta.txt "
 	command "echo ls"
