@@ -22,8 +22,9 @@ node {
     	powershell "git diff HEAD~ --name-only  | Copy-Item -Destination ${SourcesDirectory}\\ChangedFiles\\ -Recurse"
      	command "echo ChangedFiles"
     	powershell "New-Item ${SourcesDirectory}\\ChangedFiles\\ -Name ChangedMeta -type directory"
-    	command "echo \"Get-ChildItem -Path ${SourcesDirectory}\\ChangedFiles\\ -exclude ChangedMeta,*.xml,*.cfg,*.yml | Copy-Item -Destination ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\ -Recurse -PassThru \""
-    	powershell "Get-ChildItem -Path ${SourcesDirectory}\\ChangedFiles\\ -exclude ChangedMeta,*.xml,*.cfg,*.yml | Copy-Item -Destination ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\ -Recurse -PassThru"
+    	command "echo \"Get-ChildItem -Path ${SourcesDirectory}\\ChangedFiles\\ -exclude ChangedMeta,Jenkinsfile,*.xml,*.cfg,*.yml | Copy-Item -Destination ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\ -Recurse -PassThru \""
+    	powershell "Get-ChildItem -Path ${SourcesDirectory}\\ChangedFiles\\ -exclude ChangedMeta,Jenkinsfile,*.xml,*.cfg,*.yml | Copy-Item -Destination ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\ -Recurse -PassThru"
+    	
     	command "echo \"Get-ChildItem -Path ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\ -exclude *.xml | Rename-Item -NewName %{$_.Name +'-meta.xml'}\""
     	powershell "Get-ChildItem -Path ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\ -exclude *.xml | Rename-Item -NewName %{$_.Name +'-meta.xml'}"
 	command "echo Rename"
