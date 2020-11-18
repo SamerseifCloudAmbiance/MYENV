@@ -15,7 +15,7 @@ public class AP01_Job_Application_test{
             job1.name='job'+i;
             job1.tech_candidate_ID__c='samer';
             listjob.add(job1);
-               
+               //another test
             }
     insert listjob;
     list<Job_Apllication__c> job =[select Candidate__c
