@@ -63,7 +63,7 @@ node {
 		// -------------------------------------------------------------------------
 
 		stage('Deploy and Run Tests') {
-		    rc = command "sfdx force:source:deploy --wait 10 -x ./ChangedFiles/schema.xml -u ${SF_USERNAME} --testlevel ${TEST_LEVEL}"
+		    rc = command "sfdx force:source:deploy --wait 10 -x ./ChangedFiles/package.xml -u ${SF_USERNAME} --testlevel ${TEST_LEVEL}"
 		    if (rc != 0) {
 			error 'Salesforce deploy and test run failed.'
 		    }
