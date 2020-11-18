@@ -24,17 +24,16 @@ node {
     	powershell "New-Item ${SourcesDirectory}\\ChangedFiles\\ -Name ChangedMeta -type directory"
     	command "echo \"Get-ChildItem -Path ${SourcesDirectory}\\ChangedFiles\\ -exclude ChangedMeta,Jenkinsfile,*.xml,*.cfg,*.yml | Copy-Item -Destination ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\ -Recurse -PassThru \""
     	powershell "Get-ChildItem -Path ${SourcesDirectory}\\ChangedFiles\\ -exclude ChangedMeta,Jenkinsfile,*.xml,*.cfg,*.yml | Copy-Item -Destination ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\ -Recurse -PassThru"
-    	
     	command "echo \"Get-ChildItem -Path ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\ -exclude *.xml | Rename-Item -NewName {\$_.Name +'-meta.xml'}\""
     	powershell "Get-ChildItem -Path ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\ -exclude *.xml | Rename-Item -NewName {\$_.Name +'-meta.xml'}"
-	/*command "echo Rename"
+	command "echo Rename"
     	powershell "ls ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\ -exclude *.txt | % Name  > ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\SearchforMeta.txt "
 	command "echo ls"
     	powershell "$files=Get-Content ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\SearchforMeta.txt"
 	command "echo Get-Content"
-    	powershell "ForEach($file in $files){Get-ChildItem -Path ${SourcesDirectory}\\force-app\\main\\default -recurse | Where-Object { \$_.Name -match \$(\$file) } | Copy-Item -Destination ${SourcesDirectory}\\ChangedFiles}"
+    	powershell "ForEach(\$file in \$files){Get-ChildItem -Path ${SourcesDirectory}\\force-app\\main\\default -recurse | Where-Object { \$_.Name -match \$(\$file) } | Copy-Item -Destination ${SourcesDirectory}\\ChangedFiles}"
    	command "echo ChangedMeta"
-	powershell "Remove-Item -Recurse -Force ${SourcesDirectory}\\ChangedFiles\\ChangedMeta"*/
+	powershell "Remove-Item -Recurse -Force ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\"
     }
 
 
