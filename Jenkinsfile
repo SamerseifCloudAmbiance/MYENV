@@ -20,7 +20,7 @@ node {
         powershell "New-Item ${SourcesDirectory} -Name ChangedFiles -type directory"
     	command "echo ChangedFiles"
    	powershell "Copy-Item  -Path ${SourcesDirectory}\\manifest\\package.xml -Destination ${SourcesDirectory}\\ChangedFiles\\ -Recurse -force"
-    	powershell "git diff HEAD~ --name-only  | Copy-Item -Destination ${SourcesDirectory}\\ChangedFiles\\ -Recurse"
+    	powershell "git diff HEAD~ --name-only  | Copy-Item -Destination ${SourcesDirectory}\\ChangedFiles\\ -Recurse -Exclude Jenkinsfile"
      	command "echo ChangedFiles"
     	powershell "New-Item ${SourcesDirectory}\\ChangedFiles\\ -Name ChangedMeta -type directory"
     	command "echo \"Get-ChildItem -Path ${SourcesDirectory}\\ChangedFiles\\ -exclude ChangedMeta,Jenkinsfile,*.xml,*.cfg,*.yml | Copy-Item -Destination ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\ -Recurse -PassThru \""
@@ -68,7 +68,7 @@ node {
 			error 'Salesforce deploy and test run failed.'
 		    }
 		    else{
-			    powershell "Remove-Item -Recurse -Force ${SourcesDirectory}\\ChangedFiles"
+			   // powershell "Remove-Item -Recurse -Force ${SourcesDirectory}\\ChangedFiles"
 		     }
 		}
 
