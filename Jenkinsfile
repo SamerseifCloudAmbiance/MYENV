@@ -23,12 +23,12 @@ node {
      	command "echo ChangedFiles"
     	powershell "New-Item ${SourcesDirectory}\\ChangedFiles\\ -Name ChangedMeta -type directory"
     	command "echo ChangedMeta"
-    	//command "bash Get-ChildItem -Path ${SourcesDirectory}\\ChangedFiles\\ -exclude ChangedMeta,*.xml,*.cfg,*.yml | Copy-Item -Destination ${SourcesDirectory}\\ChangedFiles\\ChangedMeta -Recurse -PassThru"
-    	//command "bash Get-ChildItem -Path ${SourcesDirectory}\\ChangedFiles\\ChangedMeta -exclude *.xml | Rename-Item -NewName { $_.Name +'-meta.xml' }"
-	//command "bash ls ${SourcesDirectory}\\ChangedFiles\\ChangedMeta -exclude *.txt | % Name  > ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\SearchforMeta.txt "
-	//command "bash $files=Get-Content ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\SearchforMeta.txt"
-	//command "bash ForEach($file in $files){Get-ChildItem -Path ${SourcesDirectory}\\force-app\\main\\default -recurse | Where-Object { \$_.Name -match \$(\$file) } | Copy-Item -Destination ${SourcesDirectory}\\ChangedFiles}"
-	//command "bash Remove-Item -Recurse -Force ${SourcesDirectory}\\ChangedFiles\\ChangedMeta"
+    	powershell "Get-ChildItem -Path ${SourcesDirectory}\\ChangedFiles\\ -exclude ChangedMeta,*.xml,*.cfg,*.yml | Copy-Item -Destination ${SourcesDirectory}\\ChangedFiles\\ChangedMeta -Recurse -PassThru"
+    	powershell "Get-ChildItem -Path ${SourcesDirectory}\\ChangedFiles\\ChangedMeta -exclude *.xml | Rename-Item -NewName { $_.Name +'-meta.xml' }"
+	powershell "ls ${SourcesDirectory}\\ChangedFiles\\ChangedMeta -exclude *.txt | % Name  > ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\SearchforMeta.txt "
+	powershell "$files=Get-Content ${SourcesDirectory}\\ChangedFiles\\ChangedMeta\\SearchforMeta.txt"
+	powershell "bash ForEach($file in $files){Get-ChildItem -Path ${SourcesDirectory}\\force-app\\main\\default -recurse | Where-Object { \$_.Name -match \$(\$file) } | Copy-Item -Destination ${SourcesDirectory}\\ChangedFiles}"
+	powershell "bash Remove-Item -Recurse -Force ${SourcesDirectory}\\ChangedFiles\\ChangedMeta"
     }
 
 
